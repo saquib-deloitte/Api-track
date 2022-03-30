@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "da5f293f-5de0-4645-a0ad-71f354a99a50",
+		"name": "mini assignment1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get call",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.get(\"variable_key\");\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							"userID = '';\r",
+							"\r",
+							"resp = pm.response.json();\r",
+							"\r",
+							"for(var i = 0 ; i < resp.length ; i++){\r",
+							"\r",
+							"    if(resp[i].id == \"40\"){\r",
+							"\r",
+							"        userID = resp[i].userId;\r",
+							"\r",
+							"        break;\r",
+							"\r",
+							"    }\r",
+							"\r",
+							"}\r",
+							"\r",
+							"pm.test(\"The id is correct.\",() => {\r",
+							"\r",
+							"    pm.expect(userID === '4');\r",
+							"\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post call",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"\r",
+							"    pm.response.to.have.status(201);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Added Successfully\", function(){\r",
+							"\r",
+							"    pm.expect(pm.response.name === \"{{name}}\" && pm.response.job === \"{{job}}\")\r",
+							"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    ”name”: ”Amit”,\r\n\r\n    ”job”: ”Manager”\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "javascript"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put call",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Updated successfully\", () => {\r",
+							"\r",
+							"    pm.expect(pm.response.name === \"Arun\" && pm.response.job === \"Manager\")\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"name\": \"Arun\",\r\n\r\n    \"job\": \"Manager\",\r\n\r\n    \"updatedAt\": \"2021-06-11T07:07:25.866Z\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete call",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Deleted Successfully\", () => {\r",
+							"\r",
+							"    pm.expect(!(pm.response === null))\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts/1",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
